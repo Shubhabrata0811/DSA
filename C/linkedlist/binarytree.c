@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+//Creat the node structure
 struct node
 {
     int data;
@@ -8,7 +9,11 @@ struct node
     struct node *right;
 };
 typedef struct node node;
+
+//Initially set the value of root NULL(Empthy tree)
 node *root=NULL;
+
+//Create a new node with a given data and return the node's address
 node* createnode(int data)
 {
     node *newnode;
@@ -23,6 +28,7 @@ node* createnode(int data)
     return newnode;
 }
 
+//Take the element user want to insert and insert the element in the binary search tree
 void insert()
 {
     int idata;
@@ -72,6 +78,7 @@ void insert()
     }
 }
 
+//Print the inorder traversal of the binary tree
 void inorder(node *i)
 {
     if(i!=NULL)
@@ -83,6 +90,7 @@ void inorder(node *i)
     return;
 }
 
+//Print the preorder traversal of the binary tree
 void preorder(node *i)
 {
     if(i!=NULL)
@@ -94,6 +102,7 @@ void preorder(node *i)
     return;
 }
 
+//Print the postorder traversal of the binary tree
 void postorder(node *i)
 {
     if(i!=NULL)
@@ -104,8 +113,28 @@ void postorder(node *i)
     }
     return;
 }
+// Return the node of the node that has the data that needs to be found
+node* searchnode(node *root, int key)
+{
+    if(root==NULL)
+    {
+        return NULL;
+    }
+    if(key==root->data)
+    {
+        return root;
+    }
+    else if(key<root->data)
+    {
+        return searchnode(root->left,key);
+    }
+    else
+    {
+        return searchnode(root->right,key);
+    }
+}
 
-void deletenode()
+/*void deletenode()
 {
     int ddata;
     node *i=root,*parent=NULL,*t1,*t2,*temp;
@@ -187,12 +216,64 @@ void deletenode()
     printf("\n%d is deleted.",i->data);
     free(i);
     return;
+}*/
+
+//return the inorder succssor of a given node
+node* inordersucc(node *i)
+{
+    node *curr=i;
+    while(curr && curr->left != NULL)
+    {
+        curr=curr->left;
+    }
+    return curr;
 }
+
+//delete the node having given data
+node* deletenode(node *root,int ddata)
+{
+    node *temp;
+    if(root==NULL)
+    {
+        printf("\nTree has no such element!!");
+        return NULL;
+    }
+    if(ddata < root->data)
+    {
+        root->left=deletenode(root->left,ddata);
+    }
+    else if(ddata > root->data)
+    {
+        root->right=deletenode(root->right,ddata);
+    }
+    else
+    {
+        if(root->left==NULL)
+        {
+            temp=root->right;
+            free(root);
+            return temp;
+        }
+        else if(root->right==NULL)
+        {
+            temp=root->left;
+            free(root);
+            return temp;
+        }
+        temp=inordersucc(root->right);
+        root->data=temp->data;
+        root->right=deletenode(root->right,temp->data);
+    }
+    return root;
+}
+
 
 int main()
 {
     char choice;
-    while(scanf("%c",&choice,printf("\nEnter 'I' for insert a new element\n'D' for delete an element\n'S' to show the tree\nAny digit to quite\nEnter your choice:")))
+
+    int fdata,ddata;
+    while(scanf("%c",&choice,printf("\nEnter 'I' for insert a new element\n'D' for delete an element\n'S' to show the tree\n'F' for found  an element\n'E' for exit\nEnter your choice:")))
     {
         if(choice>96 && choice<124)
         {
@@ -201,25 +282,44 @@ int main()
         switch(choice)
         {
             case 'I':insert();break;
-            case 'D':deletenode();break;
+            case 'D':
+                {
+                    scanf("%d",&ddata,printf("\nEnter the data of the node to delete:"));
+                    root=deletenode(root,ddata);
+                    break;
+                }
             case 'S':
+                {
+                    if(root==NULL)
                     {
-                        if(root==NULL)
-                        {
-                            printf("\nTree has no elements!!");
-                            break;
-                        }
-                        else
-                        {
-                            printf("\nInorder traversal:");
-                            inorder(root);
-                            printf("\nPreorder traversal:");
-                            preorder(root);
-                            printf("\npostorder traversal:");
-                            postorder(root);
-                            break;
-                        }
+                        printf("\nTree has no elements!!");
+                        break;
                     }
+                    else
+                    {
+                        printf("\nInorder traversal:");
+                        inorder(root);
+                        printf("\nPreorder traversal:");
+                        preorder(root);
+                        printf("\npostorder traversal:");
+                        postorder(root);
+                        break;
+                    }
+                }
+            case 'F':
+                {
+                    scanf("%d",&fdata,printf("\nEnter the data of the node to find:"));
+                    if(searchnode(root,fdata)==NULL)
+                    {
+                        printf("\nKey not exist");
+                    }
+                    else
+                    {
+                        printf("\nKey exist");
+                    }
+                    break;
+                }
+            case 'E':return 0;
             default:printf("\nInvalid input!!");break;
         }
         fflush(stdin);
