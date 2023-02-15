@@ -39,6 +39,45 @@ node* insert(node *root,int idata)
 
 }
 
+node* inordersuccssor(node *i)
+{
+    node *succssor=NULL;
+    if(i!=NULL)
+    {
+        succssor=i;
+        i=i->right;
+    }
+    return succssor;
+}
+
+node* deletenode(node *root,int ddata)
+{
+    if(root==NULL)
+    {
+        return NULL;
+    }
+    if(root->data==ddata)
+    {
+        if(root->right==NULL)
+        {
+            root=root->left;
+        }
+        else if(root->left==NULL)
+    }
+    else if(ddata<root->data)
+    {
+        root->left=deletenode(root->left,ddata);
+    }
+    else if(ddata>root->data)
+    {
+        root->right=deletenode(root->right,ddata);
+    }
+    else
+    {
+          
+    }
+}
+
 void inorder(node *root)
 {
 	if(root!=NULL)
@@ -50,6 +89,27 @@ void inorder(node *root)
 	return;
 }
 
+void preorder(node *root)
+{
+	if(root!=NULL)
+	{
+        printf("\t%d",root->data);
+        preorder(root->left);
+		preorder(root->right);
+	}
+	return;
+}
+
+void postorder(node *root)
+{
+	if(root!=NULL)
+	{
+		postorder(root->left);
+		postorder(root->right);
+		printf("\t%d",root->data);
+	}
+	return;
+}
 int main()
 {
     char choice;
@@ -85,10 +145,10 @@ int main()
                     {
                         printf("\nInorder traversal:");
                         inorder(root);
-                        // printf("\nPreorder traversal:");
-                        // preorder(root);
-                        // printf("\npostorder traversal:");
-                        // postorder(root);
+                        printf("\nPreorder traversal:");
+                        preorder(root);
+                        printf("\npostorder traversal:");
+                        postorder(root);
                         break;
                     }
                 }
