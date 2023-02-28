@@ -122,7 +122,7 @@ void inordertree(node *pnode)
 int main()
 {
     int i,data,n;
-    scanf("%d",&n,printf("\nNumber of data to be imserted: "));
+    scanf("%d",&n,printf("\nNumber of data to be inserted: "));
     for(i=1;i<=n;i++)
     {
         printf("\nEnter the (%d) data to be inserted:",i);
