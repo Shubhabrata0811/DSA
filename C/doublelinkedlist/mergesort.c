@@ -1,70 +1,71 @@
-#include<stdio.h>
-#define SIZE 3
+#include <stdio.h>
+#include <stdlib.h>
 
-void merge(int *arr, int *newarr,int low,int mid, int high)
+void printarray(int *array,int length)
 {
-    int ai,bi,ci;
-    ai=low;
-    ci=low;
-    bi=mid+1;
-    while(ai<=mid && bi<=high)
+    for(int i=0;i<length;i++)
     {
-        if(arr[ai]<arr[bi])
+        printf("\t%d",array[i]);
+    }
+}
+void merge(int *array,int low,int mid,int high)
+{
+    int tempa1[mid-low+1];
+    int tempa2[high-mid];
+    int ta1i,ta2i,ai;
+    ta1i=ta2i=0;
+    ai=low;
+    for(int i=0;i<mid-low+1;i++)
+    {
+        tempa1[i]=array[low+i];
+    }
+    for(int i=0;i<high-mid;i++)
+    {
+        tempa2[i]=array[mid+1+i];
+    }
+    while(ta1i<mid-low+1 && ta2i<high-mid)
+    {
+        if(tempa1[ta1i]<tempa2[ta2i])
         {
-            newarr[ci++]=arr[ai++];
+            array[ai++]=tempa1[ta1i++];
         }
         else
         {
-            newarr[ci++]=arr[bi++];
+            array[ai++]=tempa2[ta2i++];
         }
     }
-    for(;ai<=mid;ai++)
+    for(;ta1i<mid-low+1;)
     {
-        newarr[ci++]=arr[ai];
+        array[ai++]=tempa1[ta1i++];
     }
-    for(;bi<=high;bi++)
+    for(;ta2i<high-mid;)
     {
-        newarr[ci++]=arr[bi];
+        array[ai++]=tempa2[ta2i++];
     }
-    printf("\nCurrent new arr :");
-    for(int i=0;i<SIZE;i++)
-    {
-        printf("%d  ",newarr[i]);
-    }
-    return;
 }
 
-void mergesort(int *arr, int *newarr,int low,int high)
+void mergesort(int *array,int low,int high)
 {
-    int mid=(low+high)/2;
-    if(high==low)
+    if(low<high)
     {
-        return;
-    }   
-    mergesort(arr,newarr,low,mid);
-    mergesort(arr,newarr,mid+1,high);
-    merge(arr,newarr,low,mid,high);
+        int mid=(low+high)/2;
+        mergesort(array,low,mid);
+        mergesort(array,mid+1,high);
+        merge(array,low,mid,high);
+    }
 }
-
 int main()
 {
-    int arr[SIZE];
-    int newarr[SIZE];
-    printf("\nEnter 10 values : ");
-    for(int i=0;i<SIZE;i++)
+    int array[100];
+    int length;
+    scanf("%d",&length,printf("\nEnter the length of the array:"));
+    printf("\nEnter %d values:",length);
+    for(int i=0;i<length;i++)
     {
-        scanf("%d",&arr[i]);
+        scanf("%d",&array[i]);
     }
-    printf("\nThe array is :");
-    for(int i=0;i<SIZE;i++)
-    {
-        printf("%d  ",arr[i]);
-    }
-    mergesort(arr,newarr,0,SIZE-1);
-    printf("\nThe sorted array is :");
-    for(int i=0;i<SIZE;i++)
-    {
-        printf("%d  ",newarr[i]);
-    }
+    mergesort(array,0,length-1);
+    printf("\nThe sorted array:");
+    printarray(array,length);
     return 0;
 }
