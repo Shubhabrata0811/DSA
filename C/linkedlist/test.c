@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
-
+#include<string.h>
+/*
 struct node
 {
 	int data;
@@ -170,5 +171,39 @@ int main()
         }
         fflush(stdin);
     }
+    return 0;
+}
+
+int main()
+{
+    while(1)
+    {int marks;
+    char gread[3];
+    scanf("%d",&marks,printf("\nEnter the markes out of 100:"));
+    if(marks > 90)
+        strcpy(gread,"A+");
+    else if(marks >80)
+        strcpy(gread,"A");
+    else if(marks >70)
+        strcpy(gread,"B+");
+    else if(marks >60)
+        strcpy(gread,"B");
+    else
+        strcpy(gread,"D");
+    printf("\nGread is = %s",gread);}
+    return 0;
+}*/
+
+int gcd(int a,int b)
+{
+    if(b==0)
+        return a;
+    return gcd(b,a%b);
+}
+
+int main()
+{
+    int gc=gcd(25,300);
+    printf("\nGCD=%d",gc);
     return 0;
 }
