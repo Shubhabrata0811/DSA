@@ -1,3 +1,5 @@
+//Circular singly linked list
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -32,6 +34,19 @@ void insert_at_beg(int val)
         return;
     }
     newnode->data=val;
+    node *temp=head;
+    if(temp==NULL)
+    {
+        head=newnode;
+        newnode->next=newnode;
+        printf("\n%d is inserted at head node.",head->data);
+        return;
+    }
+    while(temp->next!=head)
+    {
+        temp=temp->next;
+    }
+    temp->next==newnode;
     newnode->next=head;
     head=newnode;
     printf("\n%d is inserted at beginning ",head->data);
@@ -47,25 +62,27 @@ void insert_at_end(int val)
         return;
     }
     newnode->data=val;
-    newnode->next=NULL;
     node *temp=head;
     if(temp==NULL)
     {
         head=newnode;
+        newnode->next=newnode;
         printf("\n%d is inserted at head node.",head->data);
         return;
     }
-    while(temp->next!=NULL)
+    while(temp->next!=head)
     {
         temp=temp->next;
     }
     temp->next=newnode;
+    newnode->next=head;
     printf("\n%d is inserted at end.",temp->next->data);
 }
 
 //Insert at specific position
 void insert_at_loc(int val,int loc)
 {
+    int flag=1;
     if(loc<1)
     {
         printf("\nInvalid position!");
@@ -78,7 +95,7 @@ void insert_at_loc(int val,int loc)
         return;
     }
     newnode->data=val;
-    newnode->next=NULL;
+    newnode->next=head;
     if(loc==1)
     {
         newnode->next=head;
@@ -87,11 +104,12 @@ void insert_at_loc(int val,int loc)
         return;
     }
     node *temp=head;
-    for(int pos=1;(pos<loc-1)&&(temp!=NULL);pos++)
+    for(int pos=1;((pos<loc-1)&&(temp!=head))||flag<2;pos++)
     {
+        flag++;
         temp=temp->next;
     }
-    if(temp==NULL)
+    if(temp==head)
     {
         printf("\nInvalid position!");
         free(newnode);
@@ -207,6 +225,7 @@ void delete_val(int val)
 
 void print_list()
 {
+    int flag=0;
     if(head==NULL)
     {
         printf("\nList Empty!");
@@ -214,28 +233,29 @@ void print_list()
     }
     node *temp=head;
     printf("\nThe list: ");
-    while(temp!=NULL)
+    do
     {
+        if(temp==head)
+            flag++;
         printf("%d",temp->data);
-        if(temp->next!=NULL)
+        if(temp->next!=head->next||flag!=4)
             printf("-->");
         temp=temp->next;
-    }
+    }while(temp!=head->next||flag!=3);
+    printf("...");
 }
 
 int main()
 {
     print_list();
-    insert_at_loc(1,2);
-    print_list();
-    insert_at_loc(1,1);
-    print_list();
     insert_at_beg(0);
     print_list();
-    // insert_at_end(3);
-    // print_list();
-    // insert_at_loc(1,2);
-    // print_list();
+    insert_at_end(3);
+    print_list();
+    insert_at_end(4);
+    print_list();
+    insert_at_loc(1,2);
+    print_list();
     // insert_at_loc(3,6);
     // insert_at_loc(2,3);
     // print_list();

@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<ctype.h>
 
 struct node
 {
@@ -214,14 +215,16 @@ int main()
 	int choice,ch;
 	do
 	{
-		//fflush(stdin);
+		fflush(stdin);
 		scanf("%c",&choice,printf("\nEnter 'I' for insertion\nEnter 'D' for deletion\nEnter 'P' for print list\nEnter choice:"));
+		toupper(choice);
 		switch(choice)
 		{
 			case 'I':
 				{
 					fflush(stdin);
 					scanf("%c",&choice,printf("\nEnter 'B' for insertion at begenning\nEnter 'E' for insertion at end.\nEnter'L' for insertion at specific location.\nEnter choice:"));
+					toupper(choice);
 					switch(choice)
 					{
 						case 'B':
@@ -251,6 +254,7 @@ int main()
 				{
 					fflush(stdin);
 					scanf("%c",&choice,printf("\nEnter 'B' for deletion at begenning\nEnter 'E' for deletion at end.\nEnter 'L' for deletion at specific location.\nEnter 'D' for deletion a specific data.\nEnter choice:"));
+					toupper(choice);
 					switch(choice)
 					{
 						case 'B':
@@ -287,9 +291,8 @@ int main()
 			default:printf("\nWrong input!");
 		}
 		fflush(stdin);
-		scanf("%c",&ch,printf("\nEnter 'Y' for continue, others for exit:"));
 		
-	}while(ch=='y' || ch=='Y');
+	}while(1);
 	return 0;
 	
 }

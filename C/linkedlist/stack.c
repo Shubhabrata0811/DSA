@@ -30,7 +30,8 @@ node* createnode(int data)
 
 stack* createstack()
 {
-    stack *newstack=(stack*)malloc(sizeof(stack));
+    stack *newstack;
+    newstack=(stack*)malloc(sizeof(stack));
     newstack->top=NULL;
     newstack->noele=0;
     return newstack;
