@@ -33,17 +33,37 @@ void bubblesort(int *array,int length)
 
 int main()
 {
-    int arr[100],length;
-    scanf("%d",&length,printf("\nEnter the number of elements:"));
-    printf("\nEnter %d elements:",length);
-    for(int i=0;i<length;i++)
-    {
-        scanf("%d",&arr[i]);
-    }
-    printf("\nUser entered array:");
-    printarr(arr,length);
-    bubblesort(arr,length);
-    printf("\nSorted array:");
-    printarr(arr,length);
+    //Unit testing
+    int arr[]={1,2,3,4,5,6,7,8,9,10};//sorted array
+    int arr2[]={10,9,8,7,6,5,4,3,2,1};//reverse sorted array
+    int arr3[]={4,8,2,6,1,9,5,3,7,10};//random array
+    int arr4[]={1,1,1,1,1,1,1,1,1,1};//same element array
+    int arr5[]={1};//single element array
+    printf("\nBefore sorting arr\n");
+    printarr(arr,10);
+    printf("\nAfter sorting\n");
+    bubblesort(arr,10);
+    printarr(arr,10);
+    printf("\nBefore sorting arr2\n");
+    printarr(arr2,10);
+    printf("\nAfter sorting\n");
+    bubblesort(arr2,10);
+    printarr(arr2,10);
+    printf("\nBefore sorting arr3\n");
+    printarr(arr3,10);
+    printf("\nAfter sorting\n");
+    bubblesort(arr3,10);
+    printarr(arr3,10);
+    printf("\nBefore sorting arr4\n");
+    printarr(arr4,10);
+    printf("\nAfter sorting\n");
+    bubblesort(arr4,10);
+    printarr(arr4,10);
+    printf("\nBefore sorting arr5\n");
+    printarr(arr5,1);
+    printf("\nAfter sorting\n");
+    bubblesort(arr5,1);
+    printarr(arr5,1);
+
     return 0;
 }

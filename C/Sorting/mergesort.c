@@ -59,17 +59,36 @@ void printarray(int *array,int length)
 
 int main()
 {
-    int arr[100],noele;
-    scanf("%d",&noele,printf("\nEnter the number of elements:"));
-    printf("\nEnter %d values : ",noele);
-    for(int i=0;i<noele;i++)
-    {
-        scanf("%d",&arr[i]);
-    }
-    printf("\nThe user entered array is :");
-    printarray(arr,noele);
-    mergesort(arr,0,noele-1);
-    printf("\nThe sorted array is :");
-    printarray(arr,noele);
+    //Unit testing
+    int arr[]={1,2,3,4,5,6,7,8,9,10};//sorted array
+    int arr2[]={10,9,8,7,6,5,4,3,2,1};//reverse sorted array
+    int arr3[]={4,8,2,6,1,9,5,3,7,10};//random array
+    int arr4[]={1,1,1,1,1,1,1,1,1,1};//same element array
+    int arr5[]={1};//single element array
+    printf("\nBefore sorting arr\n");
+    printarray(arr,10);
+    printf("\nAfter sorting\n");
+    mergesort(arr,0,9);
+    printarray(arr,10);
+    printf("\nBefore sorting arr2\n");
+    printarray(arr2,10);
+    printf("\nAfter sorting\n");
+    mergesort(arr2,0,9);
+    printarray(arr2,10);
+    printf("\nBefore sorting arr3\n");
+    printarray(arr3,10);
+    printf("\nAfter sorting\n");
+    mergesort(arr3,0,9);
+    printarray(arr3,10);
+    printf("\nBefore sorting arr4\n");
+    printarray(arr4,10);
+    printf("\nAfter sorting\n");
+    mergesort(arr4,0,9);
+    printarray(arr4,10);
+    printf("\nBefore sorting arr5\n");
+    printarray(arr5,1);
+    printf("\nAfter sorting\n");
+    mergesort(arr5,0,0);
+    printarray(arr5,1);
     return 0;
 }
