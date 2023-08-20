@@ -5,7 +5,6 @@
 
 
 //Convert a whole string to upper case
-
 //using character array for strings
 void mstrtoupper_ca(char *str){
     for(;*str;){
@@ -15,31 +14,9 @@ void mstrtoupper_ca(char *str){
     }
     return;
 }
-//using character pointer for strings (not arrays)
-void mstrtoupper_cp(char **strp){
-    char *temp = (char*) malloc((strlen(*strp)+1)*sizeof(char));
-    strcpy(temp,*strp);
-    temp[strlen(*strp)]='\0';
-    char *cpy=temp;
-    for(;*cpy;){
-        printf("\n%c",*cpy);
-        if(isalpha(*cpy))
-            *cpy=toupper(*cpy);
-        printf("\n%c",*cpy);
-        cpy++;
-    }
-    printf("\n%s",temp);
-    strcpy(*strp,temp);
-    *(*strp+strlen(temp))='\0';
-    free(temp);
-    return;
-}
+
 
 //convert a whole string to lower case
-//using character pointer for strings (not arrays)
-void mstrtolower_cp(char **strp){
-    
-}
 //using character array for strings
 void mstrtolower_ca(char *str){
     for(;*str;){
@@ -80,4 +57,22 @@ int mstrispalindrome(char *s){
         return 1;
     else
         return 0;
+}
+
+//Check if two strings are anagram to each other **Case sensitive**
+int mstrcheckanagram(char *s1, char *s2){
+    int checker[256] = {0};
+    if(strlen(s1)!=strlen(s2)){
+        return 0;
+    }
+    for(int i=0;s1[i]!='\0';i++){
+        checker[(unsigned int)s1[i]]++;
+        checker[(unsigned int)s2[i]]--;
+    }
+    for(int i=0;i<256;i++){
+        if(checker[i]!=0){
+            return 0;
+        }
+    }
+    return 1;
 }

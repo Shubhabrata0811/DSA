@@ -51,8 +51,32 @@ void leftpyramid(){
     return;
 }
 
+/*
+Enter the dimension:5
+1 2 3 4 5 
+  2     5
+    3   5
+      4 5
+        5
+*/
+
 int main(){
     rightpyramid();
     leftpyramid();
     return 0;
 }
+
+/*
+Enter the dimension:5
+1 2 3 4 5 
+2     5
+3   5
+4 5
+5
+Enter the dimension:5
+1 2 3 4 5
+  2     5
+    3   5
+      4 5
+        5
+*/

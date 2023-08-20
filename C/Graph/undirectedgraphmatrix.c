@@ -36,7 +36,7 @@ int main() {
         for (int j = 0; j < cols; j++) {
             matrix[i][j] = count;
             count++;
-        }
+        }  
     }
 
     // Step 4: Access and print values

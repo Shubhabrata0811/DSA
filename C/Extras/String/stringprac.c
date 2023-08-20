@@ -11,13 +11,16 @@ strcmp();
 strrev();
 */
 int main(){
-    // char s1[40];
-    //printf("Enter s1:");
-    //gets(s1);
-    char *s1 = "LogAn";
-    printf("Before changing\ns1 = %s\ns2=\n",s1);
-    mstrtoupper_cp(&s1);
-    //mstrtolower(s2);
-    printf("After swapping\ns1 = %s\ns2=\n",s1);
+    char s1[100], s2[100];
+    printf("Enter the 1st string:");
+    gets(s1);
+    //fflush(stdin);
+    printf("Enter the second string:");
+    gets(s2);
+    //fflush(stdin);
+    if(mstrcheckanagram(s1,s2))
+        printf("\n%s and %s are anagram!",s1,s2);
+    else
+        printf("\n%s and %s are not anagram!",s1,s2);
     return 0;
 }
